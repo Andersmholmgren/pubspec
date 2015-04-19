@@ -4,7 +4,6 @@
 library util.json;
 
 import 'package:path/path.dart' as path;
-import 'package:option/option.dart';
 
 final _p = path.url;
 
@@ -18,12 +17,6 @@ JsonParser parseJson(Map j, {bool consumeMap: false}) =>
 
 class JsonBuilder {
   final Map json = {};
-
-  void addOption(String fieldName, Option o) {
-    o.map((v) => v.toJson()).map((j) {
-      json[fieldName] = j;
-    });
-  }
 
   void addObject(String fieldName, o) {
     if (o != null) {
