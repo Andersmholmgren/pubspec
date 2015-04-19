@@ -7,3 +7,4 @@
 library pubspec;
 
 export 'src/pubspec.dart';
+export 'src/dependency.dart';
