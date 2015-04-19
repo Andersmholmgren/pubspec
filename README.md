@@ -6,14 +6,19 @@ A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.
 
 A simple usage example:
 
-     // load it
-     var pubSpec = await PubSpec.load(myDirectory);
+    import 'package:pubspec/pubspec.dart';
 
-     // change the dependencies to a single path dependency on project 'foo'
-     var newPubSpec = pubSpec.copy(dependencies: { 'foo': new PathReference('../foo') });
+    main() {
+      // load it
+      var pubSpec = await PubSpec.load(myDirectory);
 
-     // save it
-     await newPubSpec.save(myDirectory);
+      // change the dependencies to a single path dependency on project 'foo'
+      var newPubSpec = pubSpec.copy(dependencies: { 'foo': new PathReference('../foo') });
+
+      // save it
+      await newPubSpec.save(myDirectory);
+    }
+
 
 ## Features and bugs
 
