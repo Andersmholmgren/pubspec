@@ -3,6 +3,4 @@
 
 library pubspec.test;
 
-
-main() {
-}
+main() {}

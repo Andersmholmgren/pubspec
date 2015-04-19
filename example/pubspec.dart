@@ -3,6 +3,4 @@
 
 library pubspec.example;
 
-
-main() {
-}
+main() {}
