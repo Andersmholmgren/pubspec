@@ -54,6 +54,11 @@ class GitReference extends DependencyReference {
   Map toJson() => ref != null
       ? {'git': {'url': url.toString(), 'ref': ref}}
       : {'git': url.toString()};
+
+  bool operator ==(other) =>
+      other is GitReference && other.url == url && other.ref == ref;
+
+  int get hashCode => ref.hashCode;
 }
 
 class PathReference extends DependencyReference {
@@ -65,6 +70,10 @@ class PathReference extends DependencyReference {
 
   @override
   Map toJson() => {'path': path};
+
+  bool operator ==(other) => other is PathReference && other.path == path;
+
+  int get hashCode => path.hashCode;
 }
 
 class HostedReference extends DependencyReference {
@@ -77,4 +86,9 @@ class HostedReference extends DependencyReference {
 
   @override
   String toJson() => "'${versionConstraint.toString()}'";
+
+  bool operator ==(other) =>
+      other is HostedReference && other.versionConstraint == versionConstraint;
+
+  int get hashCode => versionConstraint.hashCode;
 }
