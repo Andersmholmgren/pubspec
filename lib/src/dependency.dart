@@ -52,7 +52,9 @@ class GitReference extends DependencyReference {
 
   @override
   Map toJson() => ref != null
-      ? {'git': {'url': url.toString(), 'ref': ref}}
+      ? {
+          'git': {'url': url.toString(), 'ref': ref}
+        }
       : {'git': url.toString()};
 
   bool operator ==(other) =>

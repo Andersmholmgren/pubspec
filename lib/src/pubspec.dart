@@ -50,10 +50,18 @@ class PubSpec implements Jsonable {
 
   final Map unParsedYaml;
 
-  PubSpec({this.name, this.author, this.version, this.homepage,
-      this.documentation, this.description, this.environment,
-      this.dependencies: const {}, this.devDependencies: const {},
-      this.dependencyOverrides: const {}, this.unParsedYaml: const {}});
+  PubSpec(
+      {this.name,
+      this.author,
+      this.version,
+      this.homepage,
+      this.documentation,
+      this.description,
+      this.environment,
+      this.dependencies: const {},
+      this.devDependencies: const {},
+      this.dependencyOverrides: const {},
+      this.unParsedYaml: const {}});
 
   factory PubSpec.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
@@ -82,11 +90,18 @@ class PubSpec implements Jsonable {
               .readAsString()));
 
   /// creates a copy of the pubspec with the changes provided
-  PubSpec copy({String name, String author, Version version, String homepage,
-      String documentation, String description, Environment environment,
+  PubSpec copy(
+      {String name,
+      String author,
+      Version version,
+      String homepage,
+      String documentation,
+      String description,
+      Environment environment,
       Map<String, DependencyReference> dependencies,
       Map<String, DependencyReference> devDependencies,
-      Map<String, DependencyReference> dependencyOverrides, Map unParsedYaml}) {
+      Map<String, DependencyReference> dependencyOverrides,
+      Map unParsedYaml}) {
     return new PubSpec(
         name: name != null ? name : this.name,
         author: author != null ? author : this.author,
