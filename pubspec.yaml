@@ -1,7 +1,7 @@
 name: pubspec
 description: >
   A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.html) files
-version: 0.0.2
+version: 0.0.3
 author: Anders Holmgren <andersmholmgren@gmail.com>
 homepage: https://github.com/Andersmholmgren/pubspec
 environment:
