@@ -46,6 +46,22 @@ class PubSpec implements Jsonable {
 
   final Map<String, DependencyReference> devDependencies;
 
+  /// [dependencies] and [devDependencies] combined.
+  /// Does not include [dependencyOverrides]
+  Map<String, DependencyReference> get allDependencies {
+    final all = <String, DependencyReference>{};
+
+    dependencies.forEach((k, v) {
+      all[k] = v;
+    });
+
+    devDependencies.forEach((k, v) {
+      all[k] = v;
+    });
+
+    return all;
+  }
+
   final Map<String, DependencyReference> dependencyOverrides;
 
   final Map unParsedYaml;
