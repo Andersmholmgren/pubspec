@@ -4,8 +4,8 @@
 library pubspec.dependency;
 
 import 'package:pub_semver/pub_semver.dart';
-import 'json_utils.dart';
 import 'dart:convert';
+import 'package:stuff/stuff.dart';
 
 abstract class DependencyReference extends Jsonable {
   DependencyReference();
@@ -87,7 +87,7 @@ class HostedReference extends DependencyReference {
       : this(new VersionConstraint.parse(json));
 
   @override
-  String toJson() => "'${versionConstraint.toString()}'";
+  String toJson() => "${versionConstraint.toString()}";
 
   bool operator ==(other) =>
       other is HostedReference && other.versionConstraint == versionConstraint;

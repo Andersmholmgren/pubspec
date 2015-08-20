@@ -5,12 +5,12 @@ library pubspec.spec;
 
 import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/src/dependency.dart';
-import 'json_utils.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:yaml/yaml.dart';
 import 'package:path/path.dart' as p;
 import 'package:yamlicious/yamlicious.dart';
+import 'package:stuff/stuff.dart';
 
 /// Represents a [pubspec](https://www.dartlang.org/tools/pub/pubspec.html).
 ///
