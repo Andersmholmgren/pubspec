@@ -182,7 +182,7 @@ class Environment implements Jsonable {
   @override
   Map toJson() {
     return (buildJson
-      ..add('sdk', "'${sdkConstraint.toString()}'")
+      ..add('sdk', "${sdkConstraint.toString()}")
       ..addAll(unParsedYaml)).json;
   }
 }
