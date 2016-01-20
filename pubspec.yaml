@@ -14,6 +14,6 @@ dependencies:
     path: /Users/blah/dart/jefe_jefe/jefe_container_root/yamlicious
 dependency_overrides: 
 dev_dependencies: 
-  test: 'any'
+  test: "^0.12.7"
 environment: 
   sdk: '>=1.9.0 <2.0.0'
