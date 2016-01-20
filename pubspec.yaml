@@ -1,6 +1,5 @@
 author: Anders Holmgren <andersmholmgren@gmail.com>
 description: A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.html) files
-
 homepage: https://github.com/Andersmholmgren/pubspec
 name: pubspec
 version: 0.0.5
@@ -9,11 +8,15 @@ dependencies:
   pub_semver: '^1.1.0'
   yaml: '^2.1.2'
   stuff: 
-    path: /Users/blah/dart/jefe_jefe/jefe_container_root/stuff
+    git: 
+      ref: 97a86869f32fd3698a763414f0cd482ea463e47f
+      url: git@bitbucket.org:andersmholmgren/stuff.git
   yamlicious: 
-    path: /Users/blah/dart/jefe_jefe/jefe_container_root/yamlicious
+    git: 
+      ref: 956e1887ddc9e746600dce61f53f54dcce8d0ca4
+      url: git@github.com:Andersmholmgren/yamlicious.git
 dependency_overrides: 
 dev_dependencies: 
-  test: "^0.12.7"
+  test: '^0.12.7'
 environment: 
   sdk: '>=1.9.0 <2.0.0'
