@@ -13,7 +13,7 @@ dependencies:
       url: git@bitbucket.org:andersmholmgren/stuff.git
   yamlicious: 
     git: 
-      ref: 956e1887ddc9e746600dce61f53f54dcce8d0ca4
+      ref: 5f5d618b5d7a9936cc813f262aefd5d8007b97ff
       url: git@github.com:Andersmholmgren/yamlicious.git
 dependency_overrides: 
 dev_dependencies: 
