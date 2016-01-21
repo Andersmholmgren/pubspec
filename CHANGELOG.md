@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6
+
+- tidy dependencies
+
 ## 0.0.3
 
 - Added property `allDependencies` which combines `dependencies` with
