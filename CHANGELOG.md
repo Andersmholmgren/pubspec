@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- add publish_to
+
 ## 0.0.6
 
 - tidy dependencies
