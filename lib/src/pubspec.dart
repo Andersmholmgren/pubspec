@@ -40,6 +40,8 @@ class PubSpec implements Jsonable {
 
   final String description;
 
+  final Uri publishTo;
+
   final Environment environment;
 
   final Map<String, DependencyReference> dependencies;
@@ -73,6 +75,7 @@ class PubSpec implements Jsonable {
       this.homepage,
       this.documentation,
       this.description,
+      this.publishTo,
       this.environment,
       this.dependencies: const {},
       this.devDependencies: const {},
@@ -88,8 +91,9 @@ class PubSpec implements Jsonable {
         homepage: p.single('homepage'),
         documentation: p.single('documentation'),
         description: p.single('description'),
-        environment: p.single(
-            'environment', (v) => new Environment.fromJson(v)),
+        publishTo: p.single('publish_to', (v) => Uri.parse(v)),
+        environment:
+            p.single('environment', (v) => new Environment.fromJson(v)),
         dependencies: p.mapValues(
             'dependencies', (v) => new DependencyReference.fromJson(v)),
         devDependencies: p.mapValues(
@@ -113,29 +117,25 @@ class PubSpec implements Jsonable {
       String homepage,
       String documentation,
       String description,
+      Uri publishTo,
       Environment environment,
       Map<String, DependencyReference> dependencies,
       Map<String, DependencyReference> devDependencies,
       Map<String, DependencyReference> dependencyOverrides,
       Map unParsedYaml}) {
     return new PubSpec(
-        name: name != null ? name : this.name,
-        author: author != null ? author : this.author,
-        version: version != null ? version : this.version,
-        homepage: homepage != null ? homepage : this.homepage,
-        documentation: documentation != null
-            ? documentation
-            : this.documentation,
-        description: description != null ? description : this.description,
-        environment: environment != null ? environment : this.environment,
-        dependencies: dependencies != null ? dependencies : this.dependencies,
-        devDependencies: devDependencies != null
-            ? devDependencies
-            : this.devDependencies,
-        dependencyOverrides: dependencyOverrides != null
-            ? dependencyOverrides
-            : this.dependencyOverrides,
-        unParsedYaml: unParsedYaml != null ? unParsedYaml : this.unParsedYaml);
+        name: name ?? this.name,
+        author: author ?? this.author,
+        version: version ?? this.version,
+        homepage: homepage ?? this.homepage,
+        documentation: documentation ?? this.documentation,
+        description: description ?? this.description,
+        publishTo: publishTo ?? this.publishTo,
+        environment: environment ?? this.environment,
+        dependencies: dependencies ?? this.dependencies,
+        devDependencies: devDependencies ?? this.devDependencies,
+        dependencyOverrides: dependencyOverrides ?? this.dependencyOverrides,
+        unParsedYaml: unParsedYaml ?? this.unParsedYaml);
   }
 
   /// saves the pubspec to the [projectDirectory]
@@ -153,17 +153,19 @@ class PubSpec implements Jsonable {
   @override
   Map toJson() {
     return (buildJson
-      ..add('name', name)
-      ..add('author', author)
-      ..add('version', version)
-      ..add('homepage', homepage)
-      ..add('documentation', documentation)
-      ..add('environment', environment)
-      ..add('description', description)
-      ..add('dependencies', dependencies)
-      ..add('dev_dependencies', devDependencies)
-      ..add('dependency_overrides', dependencyOverrides)
-      ..addAll(unParsedYaml)).json;
+          ..add('name', name)
+          ..add('author', author)
+          ..add('version', version)
+          ..add('homepage', homepage)
+          ..add('documentation', documentation)
+          ..add('publishTo', publishTo)
+          ..add('environment', environment)
+          ..add('description', description)
+          ..add('dependencies', dependencies)
+          ..add('dev_dependencies', devDependencies)
+          ..add('dependency_overrides', dependencyOverrides)
+          ..addAll(unParsedYaml))
+        .json;
   }
 }
 
@@ -182,7 +184,8 @@ class Environment implements Jsonable {
   @override
   Map toJson() {
     return (buildJson
-      ..add('sdk', "${sdkConstraint.toString()}")
-      ..addAll(unParsedYaml)).json;
+          ..add('sdk', "${sdkConstraint.toString()}")
+          ..addAll(unParsedYaml))
+        .json;
   }
 }
