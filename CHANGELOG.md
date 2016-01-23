@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- upgraded some dependencies
+
 ## 0.0.7
 
 - add publish_to
