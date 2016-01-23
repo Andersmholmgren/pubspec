@@ -6,15 +6,9 @@ version: "0.0.8"
 dependencies: 
   path: "^1.3.9"
   pub_semver: "^1.2.3"
+  stuff: "^0.0.4"
   yaml: "^2.1.8"
-  stuff: 
-    git: 
-      ref: "799e87471523bc6cb604b0a987d5f32e4182bfd2"
-      url: "git@bitbucket.org:andersmholmgren/stuff.git"
-  yamlicious: 
-    git: 
-      ref: "bad84cd0d8b8d16a244987b42cc7fb5c130ea3fe"
-      url: "git@github.com:Andersmholmgren/yamlicious.git"
+  yamlicious: "^0.0.4"
 dev_dependencies: 
   test: "^0.12.7"
 environment: 
