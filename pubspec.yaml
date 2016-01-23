@@ -8,13 +8,9 @@ dependencies:
   pub_semver: "^1.1.0"
   yaml: "^2.1.2"
   stuff: 
-    git: 
-      ref: "799e87471523bc6cb604b0a987d5f32e4182bfd2"
-      url: "git@bitbucket.org:andersmholmgren/stuff.git"
+    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/stuff"
   yamlicious: 
-    git: 
-      ref: "bad84cd0d8b8d16a244987b42cc7fb5c130ea3fe"
-      url: "git@github.com:Andersmholmgren/yamlicious.git"
+    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/yamlicious"
 dev_dependencies: 
   test: "^0.12.7"
 environment: 
