@@ -2,13 +2,15 @@ author: "Anders Holmgren <andersmholmgren@gmail.com>"
 description: "A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.html) files"
 homepage: "https://github.com/Andersmholmgren/pubspec"
 name: "pubspec"
-version: "0.0.8"
+version: "0.0.9"
 dependencies: 
   path: "^1.3.9"
   pub_semver: "^1.2.3"
-  stuff: "^0.0.4"
   yaml: "^2.1.8"
-  yamlicious: "^0.0.4"
+  stuff: 
+    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/stuff"
+  yamlicious: 
+    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/yamlicious"
 dev_dependencies: 
   test: "^0.12.7"
 environment: 

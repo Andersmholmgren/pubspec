@@ -158,7 +158,7 @@ class PubSpec implements Jsonable {
           ..add('version', version)
           ..add('homepage', homepage)
           ..add('documentation', documentation)
-          ..add('publishTo', publishTo)
+          ..add('publish_to', publishTo)
           ..add('environment', environment)
           ..add('description', description)
           ..add('dependencies', dependencies)
