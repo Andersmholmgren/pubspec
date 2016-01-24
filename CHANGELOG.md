@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.9
+
+- Bug Fix. publish_to was serialising to publishTo
+
 ## 0.0.8
 
 - upgraded some dependencies
