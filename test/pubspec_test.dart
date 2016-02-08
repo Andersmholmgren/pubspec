@@ -1,9 +1,10 @@
+import 'dart:io';
+
+import 'package:pub_semver/pub_semver.dart';
+import 'package:pubspec/pubspec.dart';
 @Skip('not a real test')
 
 import 'package:test/test.dart';
-import 'package:pubspec/pubspec.dart';
-import 'dart:io';
-import 'package:pub_semver/pub_semver.dart';
 
 main() async {
   final PubSpec pubSpec = new PubSpec(
