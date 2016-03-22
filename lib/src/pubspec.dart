@@ -3,14 +3,15 @@
 
 library pubspec.spec;
 
-import 'package:pub_semver/pub_semver.dart';
-import 'package:pubspec/src/dependency.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:yaml/yaml.dart';
+
 import 'package:path/path.dart' as p;
-import 'package:yamlicious/yamlicious.dart';
+import 'package:pub_semver/pub_semver.dart';
+import 'package:pubspec/src/dependency.dart';
 import 'package:stuff/stuff.dart';
+import 'package:yaml/yaml.dart';
+import 'package:yamlicious/yamlicious.dart';
 
 /// Represents a [pubspec](https://www.dartlang.org/tools/pub/pubspec.html).
 ///
