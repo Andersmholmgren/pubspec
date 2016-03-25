@@ -6,5 +6,5 @@
 /// A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.html) files
 library pubspec;
 
-export 'src/pubspec.dart';
 export 'src/dependency.dart';
+export 'src/pubspec.dart';

@@ -3,8 +3,9 @@
 
 library pubspec.dependency;
 
-import 'package:pub_semver/pub_semver.dart';
 import 'dart:convert';
+
+import 'package:pub_semver/pub_semver.dart';
 import 'package:stuff/stuff.dart';
 
 abstract class DependencyReference extends Jsonable {
