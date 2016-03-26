@@ -104,6 +104,9 @@ class PubSpec implements Jsonable {
         unParsedYaml: p.unconsumed);
   }
 
+  factory PubSpec.fromYamlString(String yamlString) =>
+      new PubSpec.fromJson(loadYaml(yamlString));
+
   /// loads the pubspec from the [projectDirectory]
   static Future<PubSpec> load(Directory projectDirectory) async =>
       new PubSpec.fromJson(loadYaml(
