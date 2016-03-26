@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11
+
+- additional constructor
+
 ## 0.0.10
 
 - tidied a few things
