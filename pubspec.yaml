@@ -8,9 +8,9 @@ dependencies:
   pub_semver: "^1.2.3"
   yaml: "^2.1.8"
   stuff: 
-    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/stuff"
+    path: "../stuff"
   yamlicious: 
-    path: "/Users/blah/dart/jefe_jefe/jefe_container_root/yamlicious"
+    path: "../yamlicious"
 dev_dependencies: 
   test: "^0.12.7"
 environment: 
