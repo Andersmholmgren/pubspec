@@ -21,6 +21,8 @@ abstract class DependencyReference extends Jsonable {
           return new PathReference.fromJson(json);
         case 'git':
           return new GitReference.fromJson(json);
+        case 'hosted':
+          return new ExternalHostedReference.fromJson(json);
         default:
           throw new StateError('unexpected dependency type ${json.keys.first}');
       }
@@ -94,4 +96,20 @@ class HostedReference extends DependencyReference {
       other is HostedReference && other.versionConstraint == versionConstraint;
 
   int get hashCode => versionConstraint.hashCode;
+}
+
+class ExternalHostedReference extends DependencyReference {
+  final String name, url;
+  final VersionConstraint versionConstraint;
+
+  ExternalHostedReference(this.name, this.url, this.versionConstraint);
+
+  ExternalHostedReference.fromJson(Map json)
+      : this(json['name'], json['url'],
+            new VersionConstraint.parse(json['version']));
+
+  @override
+  toJson() {
+    return {'name': name, 'url': url, 'version': versionConstraint.toString()};
+  }
 }
