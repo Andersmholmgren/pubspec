@@ -107,8 +107,14 @@ class ExternalHostedReference extends DependencyReference {
   ExternalHostedReference(this.name, this.url, this.versionConstraint);
 
   ExternalHostedReference.fromJson(Map json)
-      : this(json['name'], json['url'],
-            new VersionConstraint.parse(json['version']));
+      : this(json['hosted']['name'], json['hosted']['url'],
+            new VersionConstraint.parse(json['hosted']['version']));
+
+  bool operator ==(other) =>
+      other is ExternalHostedReference &&
+      other.name == name &&
+      other.url == url &&
+      other.versionConstraint == versionConstraint;
 
   @override
   toJson() {
@@ -122,6 +128,9 @@ class SdkReference extends DependencyReference {
   SdkReference(this.sdk);
 
   SdkReference.fromJson(Map json) : this(json['sdk']);
+
+  bool operator ==(other) =>
+      other is SdkReference && other.sdk == sdk;
 
   @override
   toJson() {
