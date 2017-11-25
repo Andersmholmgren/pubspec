@@ -23,6 +23,8 @@ abstract class DependencyReference extends Jsonable {
           return new GitReference.fromJson(json);
         case 'hosted':
           return new ExternalHostedReference.fromJson(json);
+        case 'sdk':
+          return new SdkReference.fromJson(json);
         default:
           throw new StateError('unexpected dependency type ${json.keys.first}');
       }
@@ -111,5 +113,18 @@ class ExternalHostedReference extends DependencyReference {
   @override
   toJson() {
     return {'name': name, 'url': url, 'version': versionConstraint.toString()};
+  }
+}
+
+class SdkReference extends DependencyReference {
+  final String sdk;
+
+  SdkReference(this.sdk);
+
+  SdkReference.fromJson(Map json) : this(json['sdk']);
+
+  @override
+  toJson() {
+    return {'sdk': sdk};
   }
 }
