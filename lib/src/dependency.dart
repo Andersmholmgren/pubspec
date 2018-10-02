@@ -21,6 +21,10 @@ abstract class DependencyReference extends Jsonable {
           return new PathReference.fromJson(json);
         case 'git':
           return new GitReference.fromJson(json);
+        case 'hosted':
+          return new ExternalHostedReference.fromJson(json);
+        case 'sdk':
+          return new SdkReference.fromJson(json);
         default:
           throw new StateError('unexpected dependency type ${json.keys.first}');
       }
@@ -94,4 +98,42 @@ class HostedReference extends DependencyReference {
       other is HostedReference && other.versionConstraint == versionConstraint;
 
   int get hashCode => versionConstraint.hashCode;
+}
+
+class ExternalHostedReference extends DependencyReference {
+  final String name, url;
+  final VersionConstraint versionConstraint;
+
+  ExternalHostedReference(this.name, this.url, this.versionConstraint);
+
+  ExternalHostedReference.fromJson(Map json)
+      : this(json['hosted']['name'], json['hosted']['url'],
+            new VersionConstraint.parse(json['hosted']['version']));
+
+  bool operator ==(other) =>
+      other is ExternalHostedReference &&
+      other.name == name &&
+      other.url == url &&
+      other.versionConstraint == versionConstraint;
+
+  @override
+  toJson() {
+    return {'name': name, 'url': url, 'version': versionConstraint.toString()};
+  }
+}
+
+class SdkReference extends DependencyReference {
+  final String sdk;
+
+  SdkReference(this.sdk);
+
+  SdkReference.fromJson(Map json) : this(json['sdk']);
+
+  bool operator ==(other) =>
+      other is SdkReference && other.sdk == sdk;
+
+  @override
+  toJson() {
+    return {'sdk': sdk};
+  }
 }
