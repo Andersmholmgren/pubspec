@@ -13,7 +13,7 @@ abstract class DependencyReference extends Jsonable {
 
   factory DependencyReference.fromJson(json) {
     if (json is Map) {
-      if ((json as Map).length != 1) {
+      if (json.length != 1) {
         throw new StateError('expecting only one entry for dependency');
       }
       switch (json.keys.first as String) {
@@ -35,7 +35,7 @@ abstract class DependencyReference extends Jsonable {
     }
   }
 
-  String toString() => JSON.encode(this);
+  String toString() => json.encode(this);
 }
 
 class GitReference extends DependencyReference {
