@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:pubspec/pubspec.dart';
 import 'package:test/test.dart';
 
@@ -36,5 +38,11 @@ main() {
 
     var sdkDep = dep as SdkReference;
     expect(sdkDep.sdk, 'flutter');
+  });
+
+  test('load from file', () async {
+    final fromDir = await PubSpec.load(Directory('.'));
+    final fromFile = await PubSpec.loadFile('./pubspec.yaml');
+    expect(fromFile.toJson(), equals(fromDir.toJson()));
   });
 }
