@@ -17,7 +17,7 @@ main() {
         '            version: ^0.1.0';
     var p = new PubSpec.fromYamlString(pubspecString);
     var dep = p.dependencies['self_hosted_lib'];
-    expect(dep, const isInstanceOf<ExternalHostedReference>());
+    expect(dep, TypeMatcher<ExternalHostedReference>());
 
     var exDep = dep as ExternalHostedReference;
     expect(exDep.name, 'custom_lib');
@@ -34,7 +34,7 @@ main() {
         '        sdk: flutter\n';
     var p = new PubSpec.fromYamlString(pubspecString);
     var dep = p.dependencies['flutter'];
-    expect(dep, const isInstanceOf<SdkReference>());
+    expect(dep, TypeMatcher<SdkReference>());
 
     var sdkDep = dep as SdkReference;
     expect(sdkDep.sdk, 'flutter');
