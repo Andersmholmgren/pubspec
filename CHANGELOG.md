@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- load from file
+- replace deprecated isInstanceOf
+
 ## 0.1.0
 
 - Dart 2
