@@ -109,9 +109,11 @@ class PubSpec implements Jsonable {
 
   /// loads the pubspec from the [projectDirectory]
   static Future<PubSpec> load(Directory projectDirectory) async =>
-      new PubSpec.fromJson(loadYaml(
-          await new File(p.join(projectDirectory.path, 'pubspec.yaml'))
-              .readAsString()));
+      await loadFile(p.join(projectDirectory.path, 'pubspec.yaml'));
+
+  /// loads the pubspec from the [file]
+  static Future<PubSpec> loadFile(String file) async =>
+      new PubSpec.fromJson(loadYaml(await new File(file).readAsString()));
 
   /// creates a copy of the pubspec with the changes provided
   PubSpec copy(
