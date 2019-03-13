@@ -25,6 +25,24 @@ main() {
     expect(exDep.versionConstraint.toString(), '^0.1.0');
   });
 
+  /// According to https://www.dartlang.org/tools/pub/dependencies#version-constraints:
+  ///
+  /// The string any allows any version. This is equivalent to an empty
+  /// version constraint, but is more explicit.
+  test('dependency without the version constraint is "any" version', () {
+    var pubspecString = 'name: my_test_lib\n'
+        'version: 0.1.0\n'
+        'description: for testing\n'
+        'dependencies:\n'
+        '    meta:\n';
+    var p = new PubSpec.fromYamlString(pubspecString);
+    var dep = p.dependencies['meta'];
+    expect(dep, TypeMatcher<HostedReference>());
+
+    var exDep = dep as HostedReference;
+    expect(exDep.versionConstraint.toString(), 'any');
+  });
+
   test('sdk dependency', () {
     var pubspecString = 'name: my_test_lib\n'
         'version: 0.1.0\n'
