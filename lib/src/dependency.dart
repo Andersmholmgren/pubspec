@@ -30,6 +30,8 @@ abstract class DependencyReference extends Jsonable {
       }
     } else if (json is String) {
       return new HostedReference.fromJson(json);
+    } else if (json == null) {
+      return new HostedReference(VersionConstraint.any);
     } else {
       throw new StateError('Unable to parse dependency $json');
     }
@@ -43,6 +45,7 @@ class GitReference extends DependencyReference {
   final String ref;
 
   GitReference(this.url, this.ref);
+
   factory GitReference.fromJson(Map json) {
     final git = json['git'];
     if (git is String) {
@@ -129,8 +132,7 @@ class SdkReference extends DependencyReference {
 
   SdkReference.fromJson(Map json) : this(json['sdk']);
 
-  bool operator ==(other) =>
-      other is SdkReference && other.sdk == sdk;
+  bool operator ==(other) => other is SdkReference && other.sdk == sdk;
 
   @override
   toJson() {
