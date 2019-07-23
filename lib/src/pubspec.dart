@@ -9,9 +9,9 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/src/dependency.dart';
+import 'package:pubspec/src/yaml_to_string.dart';
 import 'package:stuff/stuff.dart';
 import 'package:yaml/yaml.dart';
-import 'package:yamlicious/yamlicious.dart';
 
 /// Represents a [pubspec](https://www.dartlang.org/tools/pub/pubspec.html).
 ///
@@ -22,10 +22,10 @@ import 'package:yamlicious/yamlicious.dart';
 ///     var pubSpec = await PubSpec.load(myDirectory);
 ///
 ///     // change the dependencies to a single path dependency on project 'foo'
-///     var newPubSpec = pubSpec.copy(dependencies: { 'foo': new PathReference('../foo') });
+///     var PubSpec = pubSpec.copy(dependencies: { 'foo': PathReference('../foo') });
 ///
 ///     // save it
-///     await newPubSpec.save(myDirectory);
+///     await PubSpec.save(myDirectory);
 ///
 ///
 class PubSpec implements Jsonable {
@@ -85,27 +85,26 @@ class PubSpec implements Jsonable {
 
   factory PubSpec.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
-    return new PubSpec(
+    return PubSpec(
         name: p.single('name'),
         author: p.single('author'),
-        version: p.single('version', (v) => new Version.parse(v)),
+        version: p.single('version', (v) => Version.parse(v)),
         homepage: p.single('homepage'),
         documentation: p.single('documentation'),
         description: p.single('description'),
         publishTo: p.single('publish_to', (v) => Uri.parse(v)),
-        environment:
-            p.single('environment', (v) => new Environment.fromJson(v)),
-        dependencies: p.mapValues(
-            'dependencies', (v) => new DependencyReference.fromJson(v)),
+        environment: p.single('environment', (v) => Environment.fromJson(v)),
+        dependencies:
+            p.mapValues('dependencies', (v) => DependencyReference.fromJson(v)),
         devDependencies: p.mapValues(
-            'dev_dependencies', (v) => new DependencyReference.fromJson(v)),
+            'dev_dependencies', (v) => DependencyReference.fromJson(v)),
         dependencyOverrides: p.mapValues(
-            'dependency_overrides', (v) => new DependencyReference.fromJson(v)),
+            'dependency_overrides', (v) => DependencyReference.fromJson(v)),
         unParsedYaml: p.unconsumed);
   }
 
   factory PubSpec.fromYamlString(String yamlString) =>
-      new PubSpec.fromJson(loadYaml(yamlString));
+      PubSpec.fromJson(loadYaml(yamlString));
 
   /// loads the pubspec from the [projectDirectory]
   static Future<PubSpec> load(Directory projectDirectory) async =>
@@ -113,7 +112,7 @@ class PubSpec implements Jsonable {
 
   /// loads the pubspec from the [file]
   static Future<PubSpec> loadFile(String file) async =>
-      new PubSpec.fromJson(loadYaml(await new File(file).readAsString()));
+      PubSpec.fromJson(loadYaml(await File(file).readAsString()));
 
   /// creates a copy of the pubspec with the changes provided
   PubSpec copy(
@@ -129,7 +128,7 @@ class PubSpec implements Jsonable {
       Map<String, DependencyReference> devDependencies,
       Map<String, DependencyReference> dependencyOverrides,
       Map unParsedYaml}) {
-    return new PubSpec(
+    return PubSpec(
         name: name ?? this.name,
         author: author ?? this.author,
         version: version ?? this.version,
@@ -145,11 +144,11 @@ class PubSpec implements Jsonable {
   }
 
   /// saves the pubspec to the [projectDirectory]
-  Future save(Directory projectDirectory) {
+  Future save(Directory projectDirectory) async {
     final ioSink =
-        new File(p.join(projectDirectory.path, 'pubspec.yaml')).openWrite();
+        File(p.join(projectDirectory.path, 'pubspec.yaml')).openWrite();
     try {
-      writeYamlString(toJson(), ioSink);
+      YamlToString().writeYamlString(toJson(), ioSink);
     } finally {
       return ioSink.close();
     }
@@ -183,8 +182,8 @@ class Environment implements Jsonable {
 
   factory Environment.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
-    return new Environment(
-        p.single('sdk', (v) => new VersionConstraint.parse(v)), p.unconsumed);
+    return Environment(
+        p.single('sdk', (v) => VersionConstraint.parse(v)), p.unconsumed);
   }
 
   @override
