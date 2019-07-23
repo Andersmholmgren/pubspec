@@ -8,3 +8,4 @@ library pubspec;
 
 export 'src/dependency.dart';
 export 'src/pubspec.dart';
+export 'src/yaml_to_string.dart';
