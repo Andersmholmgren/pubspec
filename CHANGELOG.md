@@ -1,4 +1,6 @@
 # Changelog
+## 0.1.3
+Demoved the dependency on the stuff package has it had a dependency on mirrors. The result is that you couldn't do a native compile of any package dependent on pubspec. Copied the class Json_utils.dart from stuff package to make this possible.
 
 ## 0.1.1
 
