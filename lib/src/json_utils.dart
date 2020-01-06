@@ -1,8 +1,6 @@
 // Copyright (c) 2015, Anders Holmgren. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library stuff.json;
-
 import 'package:uri/uri.dart';
 
 abstract class Jsonable {
@@ -78,8 +76,7 @@ class JsonBuilder {
 
 typedef T Converter<T>(value);
 
-Converter<T> _converter<T>(Converter<T> convert) =>
-    convert ?? (v) => v as T;
+Converter<T> _converter<T>(Converter<T> convert) => convert ?? (v) => v as T;
 
 class JsonParser {
   final Map _json;
