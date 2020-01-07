@@ -10,8 +10,9 @@ import 'package:path/path.dart' as p;
 import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/src/dependency.dart';
 import 'package:pubspec/src/yaml_to_string.dart';
-import 'package:stuff/stuff.dart';
 import 'package:yaml/yaml.dart';
+
+import 'json_utils.dart';
 
 /// Represents a [pubspec](https://www.dartlang.org/tools/pub/pubspec.html).
 ///

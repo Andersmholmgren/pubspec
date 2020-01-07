@@ -6,7 +6,8 @@ library pubspec.dependency;
 import 'dart:convert';
 
 import 'package:pub_semver/pub_semver.dart';
-import 'package:stuff/stuff.dart';
+
+import 'json_utils.dart';
 
 abstract class DependencyReference extends Jsonable {
   DependencyReference();
