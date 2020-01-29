@@ -63,4 +63,59 @@ main() {
     final fromFile = await PubSpec.loadFile('./pubspec.yaml');
     expect(fromFile.toJson(), equals(fromDir.toJson()));
   });
+
+  group('git dependency', () {
+    test('fromYamlString', () {
+      final pubspecString = 'name: my_test_lib\n'
+          'version: 0.1.0\n'
+          'description: for testing\n'
+          'dependencies:\n'
+          '    meta: ^1.0.0\n'
+          '    git_lib:\n'
+          '        git:\n'
+          '            url: git://github.com/foo/bar.git\n'
+          '            ref: master\n'
+          '            path: packages/batz';
+      final pubspec = new PubSpec.fromYamlString(pubspecString);
+
+      var dep = pubspec.dependencies['git_lib'];
+      expect(dep, TypeMatcher<GitReference>());
+
+      var gitDep = dep as GitReference;
+      expect(gitDep.url, 'git://github.com/foo/bar.git');
+      expect(gitDep.ref, 'master');
+      expect(gitDep.path, 'packages/batz');
+    });
+
+    test('toJson url', () {
+      final subject = GitReference('git://github.com/foo/bar.git');
+
+      var jsonObj = subject.toJson();
+
+      expect(jsonObj['git'], 'git://github.com/foo/bar.git');
+    });
+
+    test('toJson url, ref', () {
+      final subject = GitReference('git://github.com/foo/bar.git', 'master');
+
+      var jsonObj = subject.toJson();
+
+      expect(jsonObj['git']['url'], 'git://github.com/foo/bar.git');
+      expect(jsonObj['git']['ref'], 'master');
+    });
+
+    test('toJson url, ref, path', () {
+      final subject = GitReference(
+        'git://github.com/foo/bar.git',
+        'master',
+        'packages/batz',
+      );
+
+      var jsonObj = subject.toJson();
+
+      expect(jsonObj['git']['url'], 'git://github.com/foo/bar.git');
+      expect(jsonObj['git']['ref'], 'master');
+      expect(jsonObj['git']['path'], 'packages/batz');
+    });
+  });
 }
