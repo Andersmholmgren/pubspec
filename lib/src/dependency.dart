@@ -44,8 +44,9 @@ abstract class DependencyReference extends Jsonable {
 class GitReference extends DependencyReference {
   final String url;
   final String ref;
+  final String path;
 
-  GitReference(this.url, this.ref);
+  GitReference(this.url, [this.ref, this.path]);
 
   factory GitReference.fromJson(Map json) {
     final git = json['git'];
@@ -53,18 +54,25 @@ class GitReference extends DependencyReference {
       return new GitReference(git, null);
     } else if (git is Map) {
       Map m = git;
-      return new GitReference(m['url'], m['ref']);
+      return new GitReference(m['url'], m['ref'], m['path']);
     } else {
       throw new StateError('Unexpected format for git dependency $git');
     }
   }
 
   @override
-  Map toJson() => ref != null
-      ? {
-          'git': {'url': url.toString(), 'ref': ref}
-        }
-      : {'git': url.toString()};
+  Map toJson() {
+    if (ref == null && path == null) {
+      return {'git': url.toString()};
+    }
+
+    var arguments = {'url': url.toString()};
+
+    if (ref != null) arguments['ref'] = ref;
+    if (path != null) arguments['path'] = path;
+
+    return {'git': arguments};
+  }
 
   bool operator ==(other) =>
       other is GitReference && other.url == url && other.ref == ref;
