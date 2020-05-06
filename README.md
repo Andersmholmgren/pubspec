@@ -8,7 +8,7 @@ A simple usage example:
 
     import 'package:pubspec/pubspec.dart';
 
-    main() {
+    main() async {
       // load it
       var pubSpec = await PubSpec.load(myDirectory);
 
