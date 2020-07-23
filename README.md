@@ -13,7 +13,7 @@ A simple usage example:
       var pubSpec = await PubSpec.load(myDirectory);
 
       // change the dependencies to a single path dependency on project 'foo'
-      var newPubSpec = pubSpec.copy(dependencies: { 'foo': new PathReference('../foo') });
+      var newPubSpec = pubSpec.copy(dependencies: { 'foo': PathReference('../foo') });
 
       // save it
       await newPubSpec.save(myDirectory);

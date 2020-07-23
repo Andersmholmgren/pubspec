@@ -70,38 +70,46 @@ class PubSpec implements Jsonable {
 
   final Map unParsedYaml;
 
-  PubSpec(
-      {this.name,
-      this.author,
-      this.version,
-      this.homepage,
-      this.documentation,
-      this.description,
-      this.publishTo,
-      this.environment,
-      this.dependencies: const {},
-      this.devDependencies: const {},
-      this.dependencyOverrides: const {},
-      this.unParsedYaml: const {}});
+  const PubSpec({
+    this.name,
+    this.author,
+    this.version,
+    this.homepage,
+    this.documentation,
+    this.description,
+    this.publishTo,
+    this.environment,
+    this.dependencies = const {},
+    this.devDependencies = const {},
+    this.dependencyOverrides = const {},
+    this.unParsedYaml = const {},
+  });
 
   factory PubSpec.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
     return PubSpec(
-        name: p.single('name'),
-        author: p.single('author'),
-        version: p.single('version', (v) => Version.parse(v)),
-        homepage: p.single('homepage'),
-        documentation: p.single('documentation'),
-        description: p.single('description'),
-        publishTo: p.single('publish_to', (v) => Uri.parse(v)),
-        environment: p.single('environment', (v) => Environment.fromJson(v)),
-        dependencies:
-            p.mapValues('dependencies', (v) => DependencyReference.fromJson(v)),
-        devDependencies: p.mapValues(
-            'dev_dependencies', (v) => DependencyReference.fromJson(v)),
-        dependencyOverrides: p.mapValues(
-            'dependency_overrides', (v) => DependencyReference.fromJson(v)),
-        unParsedYaml: p.unconsumed);
+      name: p.single('name'),
+      author: p.single('author'),
+      version: p.single('version', (v) => Version.parse(v)),
+      homepage: p.single('homepage'),
+      documentation: p.single('documentation'),
+      description: p.single('description'),
+      publishTo: p.single('publish_to', (v) => Uri.parse(v)),
+      environment: p.single('environment', (v) => Environment.fromJson(v)),
+      dependencies: p.mapValues(
+        'dependencies',
+        (v) => DependencyReference.fromJson(v),
+      ),
+      devDependencies: p.mapValues(
+        'dev_dependencies',
+        (v) => DependencyReference.fromJson(v),
+      ),
+      dependencyOverrides: p.mapValues(
+        'dependency_overrides',
+        (v) => DependencyReference.fromJson(v),
+      ),
+      unParsedYaml: p.unconsumed,
+    );
   }
 
   factory PubSpec.fromYamlString(String yamlString) =>
@@ -116,38 +124,42 @@ class PubSpec implements Jsonable {
       PubSpec.fromJson(loadYaml(await File(file).readAsString()));
 
   /// creates a copy of the pubspec with the changes provided
-  PubSpec copy(
-      {String name,
-      String author,
-      Version version,
-      String homepage,
-      String documentation,
-      String description,
-      Uri publishTo,
-      Environment environment,
-      Map<String, DependencyReference> dependencies,
-      Map<String, DependencyReference> devDependencies,
-      Map<String, DependencyReference> dependencyOverrides,
-      Map unParsedYaml}) {
+  PubSpec copy({
+    String name,
+    String author,
+    Version version,
+    String homepage,
+    String documentation,
+    String description,
+    Uri publishTo,
+    Environment environment,
+    Map<String, DependencyReference> dependencies,
+    Map<String, DependencyReference> devDependencies,
+    Map<String, DependencyReference> dependencyOverrides,
+    Map unParsedYaml,
+  }) {
     return PubSpec(
-        name: name ?? this.name,
-        author: author ?? this.author,
-        version: version ?? this.version,
-        homepage: homepage ?? this.homepage,
-        documentation: documentation ?? this.documentation,
-        description: description ?? this.description,
-        publishTo: publishTo ?? this.publishTo,
-        environment: environment ?? this.environment,
-        dependencies: dependencies ?? this.dependencies,
-        devDependencies: devDependencies ?? this.devDependencies,
-        dependencyOverrides: dependencyOverrides ?? this.dependencyOverrides,
-        unParsedYaml: unParsedYaml ?? this.unParsedYaml);
+      name: name ?? this.name,
+      author: author ?? this.author,
+      version: version ?? this.version,
+      homepage: homepage ?? this.homepage,
+      documentation: documentation ?? this.documentation,
+      description: description ?? this.description,
+      publishTo: publishTo ?? this.publishTo,
+      environment: environment ?? this.environment,
+      dependencies: dependencies ?? this.dependencies,
+      devDependencies: devDependencies ?? this.devDependencies,
+      dependencyOverrides: dependencyOverrides ?? this.dependencyOverrides,
+      unParsedYaml: unParsedYaml ?? this.unParsedYaml,
+    );
   }
 
   /// saves the pubspec to the [projectDirectory]
   Future save(Directory projectDirectory) async {
-    final ioSink =
-        File(p.join(projectDirectory.path, 'pubspec.yaml')).openWrite();
+    final ioSink = File(
+      p.join(projectDirectory.path, 'pubspec.yaml'),
+    ).openWrite();
+
     try {
       YamlToString().writeYamlString(toJson(), ioSink);
     } finally {
@@ -179,12 +191,14 @@ class Environment implements Jsonable {
   final VersionConstraint sdkConstraint;
   final Map unParsedYaml;
 
-  Environment(this.sdkConstraint, this.unParsedYaml);
+  const Environment(this.sdkConstraint, this.unParsedYaml);
 
   factory Environment.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
     return Environment(
-        p.single('sdk', (v) => VersionConstraint.parse(v)), p.unconsumed);
+      p.single('sdk', (v) => VersionConstraint.parse(v)),
+      p.unconsumed,
+    );
   }
 
   @override
