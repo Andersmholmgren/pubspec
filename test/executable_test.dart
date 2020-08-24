@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:pubspec/pubspec.dart';
 import 'package:pubspec/src/executable.dart';
 import 'package:test/test.dart';
@@ -33,9 +31,6 @@ executables:
     // expect(exec.name, equals('useful-script'));
     expect(exec.script, isNull);
 
-    expect(
-        p.executables.keys,
-        unorderedEquals(
-            ['polymer-new-element', 'useful-script', 'dcli_install']));
+    expect(p.executables.keys, unorderedEquals(['polymer-new-element', 'useful-script', 'dcli_install']));
   });
 }
