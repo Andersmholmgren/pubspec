@@ -12,6 +12,7 @@ import 'package:pubspec/src/dependency.dart';
 import 'package:pubspec/src/yaml_to_string.dart';
 import 'package:yaml/yaml.dart';
 
+import 'executable.dart';
 import 'json_utils.dart';
 
 /// Represents a [pubspec](https://www.dartlang.org/tools/pub/pubspec.html).
@@ -68,6 +69,8 @@ class PubSpec implements Jsonable {
 
   final Map<String, DependencyReference> dependencyOverrides;
 
+  final Map<String, Executable> executables;
+
   final Map unParsedYaml;
 
   PubSpec(
@@ -82,6 +85,7 @@ class PubSpec implements Jsonable {
       this.dependencies: const {},
       this.devDependencies: const {},
       this.dependencyOverrides: const {},
+      this.executables: const {},
       this.unParsedYaml: const {}});
 
   factory PubSpec.fromJson(Map json) {
@@ -101,6 +105,7 @@ class PubSpec implements Jsonable {
             'dev_dependencies', (v) => DependencyReference.fromJson(v)),
         dependencyOverrides: p.mapValues(
             'dependency_overrides', (v) => DependencyReference.fromJson(v)),
+        executables: p.mapValues('executables', (v) => Executable.fromJson(v)),
         unParsedYaml: p.unconsumed);
   }
 
@@ -128,6 +133,7 @@ class PubSpec implements Jsonable {
       Map<String, DependencyReference> dependencies,
       Map<String, DependencyReference> devDependencies,
       Map<String, DependencyReference> dependencyOverrides,
+      Map<String, Executable> executables,
       Map unParsedYaml}) {
     return PubSpec(
         name: name ?? this.name,
@@ -141,6 +147,7 @@ class PubSpec implements Jsonable {
         dependencies: dependencies ?? this.dependencies,
         devDependencies: devDependencies ?? this.devDependencies,
         dependencyOverrides: dependencyOverrides ?? this.dependencyOverrides,
+        executables: executables ?? this.executables,
         unParsedYaml: unParsedYaml ?? this.unParsedYaml);
   }
 
@@ -170,6 +177,7 @@ class PubSpec implements Jsonable {
           ..add('dependencies', dependencies)
           ..add('dev_dependencies', devDependencies)
           ..add('dependency_overrides', dependencyOverrides)
+          ..add('executables', executables)
           ..addAll(unParsedYaml))
         .json;
   }
