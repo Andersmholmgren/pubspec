@@ -73,7 +73,7 @@ class PubSpec implements Jsonable {
 
   final Map unParsedYaml;
 
-  PubSpec(
+  const PubSpec(
       {this.name,
       this.author,
       this.version,
@@ -187,7 +187,7 @@ class Environment implements Jsonable {
   final VersionConstraint sdkConstraint;
   final Map unParsedYaml;
 
-  Environment(this.sdkConstraint, this.unParsedYaml);
+  const Environment(this.sdkConstraint, this.unParsedYaml);
 
   factory Environment.fromJson(Map json) {
     final p = parseJson(json, consumeMap: true);
