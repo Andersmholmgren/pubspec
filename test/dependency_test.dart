@@ -16,7 +16,7 @@ main() {
         '            url: https://pub.mycompany.org\n'
         '            version: ^0.1.0';
     var p = new PubSpec.fromYamlString(pubspecString);
-    var dep = p.dependencies['self_hosted_lib'];
+    var dep = p.dependencies['self_hosted_lib']!;
     expect(dep, TypeMatcher<ExternalHostedReference>());
 
     var exDep = dep as ExternalHostedReference;
@@ -36,7 +36,7 @@ main() {
         'dependencies:\n'
         '    meta:\n';
     var p = new PubSpec.fromYamlString(pubspecString);
-    var dep = p.dependencies['meta'];
+    var dep = p.dependencies['meta']!;
     expect(dep, TypeMatcher<HostedReference>());
 
     var exDep = dep as HostedReference;
@@ -51,7 +51,7 @@ main() {
         '    flutter:\n'
         '        sdk: flutter\n';
     var p = new PubSpec.fromYamlString(pubspecString);
-    var dep = p.dependencies['flutter'];
+    var dep = p.dependencies['flutter']!;
     expect(dep, TypeMatcher<SdkReference>());
 
     var sdkDep = dep as SdkReference;
@@ -78,7 +78,7 @@ main() {
           '            path: packages/batz';
       final pubspec = new PubSpec.fromYamlString(pubspecString);
 
-      var dep = pubspec.dependencies['git_lib'];
+      var dep = pubspec.dependencies['git_lib']!;
       expect(dep, TypeMatcher<GitReference>());
 
       var gitDep = dep as GitReference;

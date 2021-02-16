@@ -5,6 +5,7 @@ library pubspec.dependency;
 
 import 'dart:convert';
 
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:pub_semver/pub_semver.dart';
 
 import 'json_utils.dart';
@@ -43,8 +44,8 @@ abstract class DependencyReference extends Jsonable {
 
 class GitReference extends DependencyReference {
   final String url;
-  final String ref;
-  final String path;
+  final String? ref;
+  final String? path;
 
   GitReference(this.url, [this.ref, this.path]);
 
@@ -68,8 +69,8 @@ class GitReference extends DependencyReference {
 
     var arguments = {'url': url.toString()};
 
-    if (ref != null) arguments['ref'] = ref;
-    if (path != null) arguments['path'] = path;
+    if (ref != null) arguments['ref'] = ref!;
+    if (path != null) arguments['path'] = path!;
 
     return {'git': arguments};
   }
@@ -81,7 +82,7 @@ class GitReference extends DependencyReference {
 }
 
 class PathReference extends DependencyReference {
-  final String path;
+  final String? path;
 
   PathReference(this.path);
 
@@ -113,7 +114,7 @@ class HostedReference extends DependencyReference {
 }
 
 class ExternalHostedReference extends DependencyReference {
-  final String name, url;
+  final String? name, url;
   final VersionConstraint versionConstraint;
 
   ExternalHostedReference(this.name, this.url, this.versionConstraint);
@@ -135,7 +136,7 @@ class ExternalHostedReference extends DependencyReference {
 }
 
 class SdkReference extends DependencyReference {
-  final String sdk;
+  final String? sdk;
 
   SdkReference(this.sdk);
 

@@ -13,7 +13,7 @@ import 'json_utils.dart';
 
 class Executable extends Jsonable {
   // String name;
-  String script;
+  String? script;
 
   Executable(this.script);
 
@@ -30,7 +30,6 @@ class Executable extends Jsonable {
   String get scriptPath => 'bin/$script.dart';
 
   @override
-  // Map toJson() => {name: script ?? ''};
   String toJson() => script ?? '';
 
   bool operator ==(other) => other is Executable && other.script == script;

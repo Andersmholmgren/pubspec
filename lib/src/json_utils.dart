@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Anders Holmgren. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:uri/uri.dart';
 
 abstract class Jsonable {
@@ -8,7 +9,7 @@ abstract class Jsonable {
 }
 
 JsonBuilder get buildJson => new JsonBuilder();
-JsonParser parseJson(Map j, {bool consumeMap: false}) =>
+JsonParser parseJson(Map? j, {bool consumeMap: false}) =>
     new JsonParser(j, consumeMap);
 
 class JsonBuilder {
@@ -23,7 +24,7 @@ class JsonBuilder {
 //    }
 //  }
 
-  void add(String fieldName, v, [transform(v)]) {
+  void add(String fieldName, v, [transform(v)?]) {
     if (v != null) {
       final transformed = _transformValue(v, transform);
       if (transformed != null) {
@@ -36,7 +37,7 @@ class JsonBuilder {
     json.addAll(map);
   }
 
-  _transformValue(value, [transform(v)]) {
+  _transformValue(value, [transform(v)?]) {
     if (transform != null) {
       return transform(value);
     }
@@ -76,29 +77,29 @@ class JsonBuilder {
 
 typedef T Converter<T>(value);
 
-Converter<T> _converter<T>(Converter<T> convert) => convert ?? (v) => v as T;
+Converter<T> _converter<T>(Converter<T>? convert) => convert ?? ((v) => v as T);
 
 class JsonParser {
-  final Map _json;
+  final Map? _json;
   final bool _consumeMap;
 
-  JsonParser(Map json, bool consumeMap)
-      : this._json = consumeMap ? new Map.from(json) : json,
+  JsonParser(Map? json, bool consumeMap)
+      : this._json = consumeMap ? new Map.from(json!) : json,
         this._consumeMap = consumeMap;
 
-  List<T> list<T>(String fieldName, [Converter<T> create]) {
-    final List l = _getField(fieldName);
+  List<T> list<T>(String fieldName, [Converter<T>? create]) {
+    final List? l = _getField(fieldName);
     return l != null ? l.map(_converter(create)).toList(growable: false) : [];
   }
 
-  T single<T>(String fieldName, [T create(i)]) {
+  T? single<T>(String fieldName, [T create(i)?]) {
     final j = _getField(fieldName);
     return j != null ? _converter(create)(j) : null;
   }
 
   Map<K, V> mapValues<K, V>(String fieldName,
-      [Converter<V> convertValue, Converter<K> convertKey]) {
-    final Map m = _getField(fieldName);
+      [Converter<V>? convertValue, Converter<K>? convertKey]) {
+    final Map? m = _getField(fieldName);
 
     if (m == null) {
       return {};
@@ -115,10 +116,10 @@ class JsonParser {
     return result;
   }
 
-  T _getField<T>(String fieldName) =>
-      (_consumeMap ? _json.remove(fieldName) : _json[fieldName]);
+  T? _getField<T>(String fieldName) =>
+      (_consumeMap ? _json!.remove(fieldName) : _json![fieldName]);
 
-  Map get unconsumed {
+  Map? get unconsumed {
     if (!_consumeMap) {
       throw new StateError('unconsumed called on non consuming parser');
     }

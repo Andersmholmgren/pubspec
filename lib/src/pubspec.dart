@@ -31,21 +31,21 @@ import 'json_utils.dart';
 ///
 ///
 class PubSpec implements Jsonable {
-  final String name;
+  final String? name;
 
-  final String author;
+  final String? author;
 
-  final Version version;
+  final Version? version;
 
-  final String homepage;
+  final String? homepage;
 
-  final String documentation;
+  final String? documentation;
 
-  final String description;
+  final String? description;
 
-  final Uri publishTo;
+  final Uri? publishTo;
 
-  final Environment environment;
+  final Environment? environment;
 
   final Map<String, DependencyReference> dependencies;
 
@@ -71,7 +71,7 @@ class PubSpec implements Jsonable {
 
   final Map<String, Executable> executables;
 
-  final Map unParsedYaml;
+  final Map? unParsedYaml;
 
   PubSpec(
       {this.name,
@@ -88,7 +88,7 @@ class PubSpec implements Jsonable {
       this.executables: const {},
       this.unParsedYaml: const {}});
 
-  factory PubSpec.fromJson(Map json) {
+  factory PubSpec.fromJson(Map? json) {
     final p = parseJson(json, consumeMap: true);
     return PubSpec(
         name: p.single('name'),
@@ -122,19 +122,19 @@ class PubSpec implements Jsonable {
 
   /// creates a copy of the pubspec with the changes provided
   PubSpec copy(
-      {String name,
-      String author,
-      Version version,
-      String homepage,
-      String documentation,
-      String description,
-      Uri publishTo,
-      Environment environment,
-      Map<String, DependencyReference> dependencies,
-      Map<String, DependencyReference> devDependencies,
-      Map<String, DependencyReference> dependencyOverrides,
-      Map<String, Executable> executables,
-      Map unParsedYaml}) {
+      {String? name,
+      String? author,
+      Version? version,
+      String? homepage,
+      String? documentation,
+      String? description,
+      Uri? publishTo,
+      Environment? environment,
+      Map<String, DependencyReference>? dependencies,
+      Map<String, DependencyReference>? devDependencies,
+      Map<String, DependencyReference>? dependencyOverrides,
+      Map<String, Executable>? executables,
+      Map? unParsedYaml}) {
     return PubSpec(
         name: name ?? this.name,
         author: author ?? this.author,
@@ -178,14 +178,14 @@ class PubSpec implements Jsonable {
           ..add('dev_dependencies', devDependencies)
           ..add('dependency_overrides', dependencyOverrides)
           ..add('executables', executables)
-          ..addAll(unParsedYaml))
+          ..addAll(unParsedYaml!))
         .json;
   }
 }
 
 class Environment implements Jsonable {
-  final VersionConstraint sdkConstraint;
-  final Map unParsedYaml;
+  final VersionConstraint? sdkConstraint;
+  final Map? unParsedYaml;
 
   Environment(this.sdkConstraint, this.unParsedYaml);
 
@@ -199,7 +199,7 @@ class Environment implements Jsonable {
   Map toJson() {
     return (buildJson
           ..add('sdk', "${sdkConstraint.toString()}")
-          ..addAll(unParsedYaml))
+          ..addAll(unParsedYaml!))
         .json;
   }
 }

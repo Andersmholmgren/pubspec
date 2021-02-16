@@ -16,17 +16,17 @@ executables:
   dcli_install: dcliinstall
 ''';
     var p = new PubSpec.fromYamlString(pubspecString);
-    var exec = p.executables['dcli_install'];
+    var exec = p.executables['dcli_install']!;
     expect(exec, TypeMatcher<Executable>());
     //expect(exec.name, equals('dcli_install'));
     expect(exec.script, equals('dcliinstall'));
 
-    exec = p.executables['polymer-new-element'];
+    exec = p.executables['polymer-new-element']!;
     expect(exec, TypeMatcher<Executable>());
     //expect(exec.name, equals('polymer-new-element'));
     expect(exec.script, equals('new_element'));
 
-    exec = p.executables['useful-script'];
+    exec = p.executables['useful-script']!;
     expect(exec, TypeMatcher<Executable>());
     // expect(exec.name, equals('useful-script'));
     expect(exec.script, isNull);
