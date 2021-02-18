@@ -1,11 +1,11 @@
+@Skip('not a real test')
 import 'dart:io';
 
 import 'package:pub_semver/pub_semver.dart';
-import 'package:pubspec/pubspec.dart';
+import 'package:pubspec2/pubspec2.dart';
 
 import 'package:test/test.dart';
 
-@Skip('not a real test')
 main() async {
   final PubSpec pubSpec = new PubSpec(name: 'fred', dependencies: {
     'foo': new PathReference('../foo'),
