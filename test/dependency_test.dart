@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:pubspec/pubspec.dart';
+import 'package:pubspec2/pubspec.dart';
 import 'package:test/test.dart';
 
 main() {
