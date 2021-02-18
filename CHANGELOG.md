@@ -1,3 +1,39 @@
+# 1.0.0
+Temporary release until real pubspec becomes nnbd ready.
+Looks like the recommendation now is to push a stable nndb release so I've updated the version no. to 1.0.0 and changed imports to relative (unrelated.)
+the nnbd version of uri has now been published as 1.0.0 so I've updated the dependency. I also had the incorrect sdk version as it was too specific.
+Removed funding.yml.
+Updated version no. to 1.0.0-nullsafety.0.
+Null safe version. Currently relies on unpublished version of uri but it looks like its about to be published and once done this code will work. All unit tests are passing using a local copy of uri.
+Merge branch 'master' of github.com:Andersmholmgren/pubspec into nullsafety
+start of null saftey upgrade
+Create FUNDING.yml
+bump version
+Merge pull request #21 from bsutton/master
+Released 0.1.4
+removed unused import.
+Exported Executable.
+Added support for 'exectuables' map in the pubspec.
+Merge pull request #17 from adrianjagielak/feature/addPubdevExample
+Add pub.dev example and fix example in README
+bump version
+Merge pull request #16 from nicholasspencer/master
+Add path support to git dependencies
+Merge pull request #13 from bsutton/master
+removed library clause which is no longer needed.
+removed the dependency on stuff has it had a dependency on mirrors. The result is that you couldn't do a native compile of any package dependent on pubspec. Copied the class Json_utils.dart from stuff package to make this possible.
+Merge pull request #10 from SergeShkurko/master
+Export yamlToString util
+Fixed the ubiquitous use of quotes & small syntax refactoring
+Merge pull request #8 from f3ath/allow-empty-version
+Allow empty version
+ load from file - replace deprecated isInstanceOf
+Merge pull request #6 from f3ath/deprecated-member
+Merge pull request #7 from f3ath/load-from-file
+Add PubSpec.loadFile(). Fixes #5
+isInstanceOf is deprecated
+Merge branch 'release/0.1.0'
+
 # 0.1.4
 Added support for 'executables' map in the pubspec.
 Exported Executable.
