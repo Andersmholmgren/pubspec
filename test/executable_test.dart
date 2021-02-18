@@ -1,5 +1,4 @@
 import 'package:pubspec/pubspec.dart';
-import 'package:pubspec/src/executable.dart';
 import 'package:test/test.dart';
 
 main() {
