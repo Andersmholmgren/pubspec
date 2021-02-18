@@ -1,14 +1,13 @@
 name: pubspec2
-author: Anders Holmgren <andersmholmgren@gmail.com>
 version: 1.0.0
 homepage: https://github.com/Andersmholmgren/pubspec
 description: This version is a place holder until pubspec is published with nnbd support. A library for manipulating [pubspec](https://www.dartlang.org/tools/pub/pubspec.html) files
 environment: 
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.12.0-259.9.beta <3.0.0'
 dependencies: 
   path: ^1.8.0
   pub_semver: ^2.0.0
   yaml: ^3.0.0
-  uri: 1.0.0
+  uri: ^1.0.0
 dev_dependencies: 
   test: ^1.3.3
