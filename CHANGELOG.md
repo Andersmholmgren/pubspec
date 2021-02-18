@@ -1,4 +1,8 @@
 # 1.0.0
+Change the sdk constraint according to the guide lines.
+renamed pubspec.dart to pubspec2.dart
+
+# 1.0.0
 Temporary release until real pubspec becomes nnbd ready.
 Looks like the recommendation now is to push a stable nndb release so I've updated the version no. to 1.0.0 and changed imports to relative (unrelated.)
 the nnbd version of uri has now been published as 1.0.0 so I've updated the dependency. I also had the incorrect sdk version as it was too specific.
