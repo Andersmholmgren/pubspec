@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:pub_semver/pub_semver.dart';
-import 'package:pubspec2/pubspec.dart';
+import 'package:pubspec2/pubspec2.dart';
 
 import 'package:test/test.dart';
 

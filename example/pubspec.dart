@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:io';
-import 'package:pubspec2/pubspec.dart';
+import 'package:pubspec2/pubspec2.dart';
 
 main() async {
   // specify the directory
